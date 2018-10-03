@@ -1,0 +1,52 @@
+{{!-- Inside your burger directory, create a folder named views.
+
+Create the index.handlebars file inside views directory.
+
+Create the layouts directory inside views directory.
+
+Create the main.handlebars file inside layouts directory.
+
+Setup the main.handlebars file so it's able to be used by Handlebars.
+
+Setup the index.handlebars to have the template that Handlebars can render onto.
+
+Create a button in index.handlebars that will submit the user input into the database. --}}
+
+<h1>Burgers!</h1>
+
+<h2>Burger List!</h2>
+
+<div class ="main row">
+  <ul>
+    {{#each burgers}}{{#unless devoured}}
+      <li>
+        <p class = "burgerType">{{this.burger_name}}</p>
+        <form action ="api/burgers/{{this.id}}?_method=PUT" method="POST" class="dev">
+          <input type ="hidden" name ="devoured" value ="true">
+          <button class="btn" type ="submit">Devour burger</button>
+        </form>      
+      </li>
+    {{/unless}}
+  {{/each}}
+</ul>
+</div>
+
+<h2>Devoured!</h2>
+
+  <ul>
+    {{#each burgers}}{{#if devoured}}
+      <li>
+        <p class="burgerType">{{this.burger_name}}</p>
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+
+<h2>Add a Burger</h2>
+
+<form class = "form-inline" action = "api/burgers/" method = "POST">
+  <div class = "form-group">
+    <input type = "text" class = "form-control" name = "name" placeholder="Enter burger">
+  </div>
+  <button type = "submit" class ="btn">Submit Hamburge</button>
+</form>
